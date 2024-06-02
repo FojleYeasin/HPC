@@ -12,7 +12,7 @@ public class Bank {
     }
 
     // A deposit function that will run in parallel on a separate thread. It will be a loop where in each iteration, it read the amount from the operationQueue and deposit the amount.
-    public void deposit() {
+    public synchronized void  deposit() {
         //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
         // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
         while (true) {
@@ -33,7 +33,7 @@ public class Bank {
     }
 
     // A withdraw function that will run in parallel on a separate thread. It will be a loop where in each iteration, it read the amount from the operationQueue and withdraw the amount.
-    public void withdraw() {
+    public synchronized void withdraw() {
         while (true) {
             int amount = operationsQueue.getNextItem();
             if(amount == -9999) {
@@ -41,7 +41,6 @@ public class Bank {
             }
 
             if(balance+amount<0){
-
                 System.out.println("Not enough balance to deposite "+amount);
                 continue;
             }

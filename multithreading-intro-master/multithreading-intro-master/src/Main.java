@@ -17,20 +17,20 @@ public class Main {
         simulationThread.start();
         simulationThread.join();
 
-
         System.out.printf("Initializing deposit systen....");
         Thread depositThread = new Thread(() -> {
             bank.deposit();
         });
-        depositThread.start();
-        System.out.println("coompleted");
-        depositThread.join();
 
+        System.out.println("coompleted");
         System.out.printf("Initializing withdraw systen....");
         Thread withdrawThread = new Thread(() -> {
             bank.withdraw();
         });
+        depositThread.start();
         withdrawThread.start();
+        depositThread.join();
+        withdrawThread.join();
         System.out.println("coompleted");
 
 
